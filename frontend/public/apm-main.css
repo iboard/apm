@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding-top: 0em;
+  padding-left: 1em;
+  padding-right: 1em;
+  background: silver;
+  font-family: Helvetica neue, Helvetica, Arial, sans-serif;
+}
+
+.page-header {
+  background: skyblue;
+}
+
+.main-section {
+  background: white;
+}
