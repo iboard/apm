@@ -1,0 +1,14 @@
+<div class="jumbotron padding-normal">
+  <h2><%= gettext "Welcome to %{name}", name: "APM" %></h2>
+  <p class="lead align-left">The <b>Agile Project Manager</b> who's helping you
+  building agile projects and keep track of your progress and technical dept.
+  </p>
+</div>
+
+<div class="row marketing">
+  <div class="col-lg-6">
+  </div>
+
+  <div class="col-lg-6">
+  </div>
+</div>
