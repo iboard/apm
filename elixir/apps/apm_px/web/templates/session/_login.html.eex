@@ -1,0 +1,17 @@
+<h2>You're not logged in!</h2>
+
+<%= form_tag("/login", method: :post, class: "login-form") %>
+  <label for="user"><%= gettext "User" %></label>
+  <input class="user" name="user" type="text"></input>
+  <br>
+  <label for="role"><%= gettext "Role" %></label>
+  <select name="role">
+    <option value="developer"><%= gettext "Developer" %></option>
+    <option value="pm"><%= gettext "Product Manager" %></option>
+  </select>
+  <br>
+  <label for="login">&nbsp;</label>
+  <button id="login"><%= gettext "Login" %></button>
+</form>
+
+

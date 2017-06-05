@@ -1,10 +1,11 @@
-/* This file is for your main application css. */
+.align-left { text-align: left; }
 
-.align-left {
-  text-align: left;
-}
+.padding-normal { padding: 0.1em; }
 
-.padding-normal {
-  padding: 0.1em; 
-}
-
+.login { padding: 0.5em; border: 1px solid #888; border-radius: 0.25em; }
+.login h2 { margin-top: 0px; font-size: small; }
+.login .login-form { }
+.login .login-form label { width: 5em; text-align: right; padding-right: 1em;}
+.login .login-form input { width: 15em; }
+.login .login-form select { width: 15em; }
+.login .login-form button { width: 15em; border-radius: 0.5em; background: darkblue; color: white; }

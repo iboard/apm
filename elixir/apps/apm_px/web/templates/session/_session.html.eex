@@ -1,0 +1,4 @@
+<h2>You are logged in!</h2>
+<code>
+  <%= inspect(@conn) %>
+</code>
