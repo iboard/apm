@@ -8,3 +8,8 @@ config :apm_px, ApmPx.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Hound testing
+config :hound, driver: "phantomjs"
+
+
