@@ -1,11 +1,33 @@
-.align-left { text-align: left; }
+/*               */
+/* General stuff */
+/*               */
+button { 
+  background: #3674D0; color: white;
+  border: none;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
 
+/*           */
+/* Modifiers */
+/*           */
+.align-left { text-align: left; }
 .padding-normal { padding: 0.1em; }
 
+/*            */
+/* Components */
+/*            */
+
 .menu-and-login {
-  margin-bottom: 1em;
+  margin-bottom: 0;
   margin-top: 0;
-  height: 5em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .top-navigation {
@@ -14,10 +36,17 @@
   margin-bottom: 0;
 }
 
-.login { font-size: x-small; height: 5em; float: right; text-align: right; padding-left: 2em; }
-.login h2 { margin-top: 0px; font-size: x-small; }
+.main {
+  margin: 0;
+  padding: 1em;
+}
+
+/* Login component in header */
+.login { font-size: x-small; height: 5em; float: right; text-align: left; padding-left: 2em; }
+.login > h2 { margin-top: 0px; font-size: x-small; }
 .login .login-form { }
 .login .login-form label { }
 .login .login-form input { }
 .login .login-form select {  }
-.login .login-form button { border-radius: 0.5em; background: #3674D0; color: white; }
+
+
