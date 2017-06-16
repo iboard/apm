@@ -14,12 +14,17 @@
   <body>
     <div class="container">
       <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="/">Home</a></li>
-          </ul>
-        </nav>
         <span class="logo"></span>
+        <div class="menu-and-login">
+          <div class="login">
+            <%= SessionView.render_session(@conn) %>
+          </div>
+          <nav class="top-navigation" role="navigation">
+            <ul class="nav nav-pills pull-left">
+              <li><a href="/">Home</a></li>
+            </ul>
+          </nav>
+        </div>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

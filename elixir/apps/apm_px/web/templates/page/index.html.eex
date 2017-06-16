@@ -13,6 +13,3 @@
   </div>
 </div>
 
-<div class="login">
-  <%= SessionView.render_session(@conn) %>
-</div>

@@ -2,10 +2,22 @@
 
 .padding-normal { padding: 0.1em; }
 
-.login { padding: 0.5em; border: 1px solid #888; border-radius: 0.25em; }
-.login h2 { margin-top: 0px; font-size: small; }
+.menu-and-login {
+  margin-bottom: 1em;
+  margin-top: 0;
+  height: 5em;
+}
+
+.top-navigation {
+  height: 5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.login { font-size: x-small; height: 5em; float: right; text-align: right; padding-left: 2em; }
+.login h2 { margin-top: 0px; font-size: x-small; }
 .login .login-form { }
-.login .login-form label { width: 5em; text-align: right; padding-right: 1em;}
-.login .login-form input { width: 15em; }
-.login .login-form select { width: 15em; }
-.login .login-form button { width: 15em; border-radius: 0.5em; background: darkblue; color: white; }
+.login .login-form label { }
+.login .login-form input { }
+.login .login-form select {  }
+.login .login-form button { border-radius: 0.5em; background: #3674D0; color: white; }
