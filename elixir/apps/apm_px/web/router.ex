@@ -16,8 +16,9 @@ defmodule ApmPx.Router do
   scope "/", ApmPx do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
-    post "/login", SessionController, :login
+    get "/"       , PageController   , :index
+    post "/login" , SessionController, :login
+    post "/logout", SessionController, :logout
   end
 
   # Other scopes may use custom stacks.

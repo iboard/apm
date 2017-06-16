@@ -1,4 +1,11 @@
-<h2>You are logged in!</h2>
-<code>
-  <%= inspect(@conn) %>
-</code>
+<h2 id="login-state">
+  <%= gettext "You're logged in as '%{user}' in the role of a '%{role}'", 
+      user: current_user_name(@conn), role: current_user_role(@conn) 
+  %>
+</h2>
+
+<%= form_tag("/logout", method: :post, class: "login-form") %>
+  <button id="logout"><%= gettext "logout" %></button>
+</form>
+
+

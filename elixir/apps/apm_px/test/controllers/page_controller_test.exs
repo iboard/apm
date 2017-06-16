@@ -8,6 +8,6 @@ defmodule ApmPx.PageControllerTest do
 
   test "GET / when not logged in", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200) =~ "You're not logged in"
+    assert html_response(conn, 200) =~ "You&#39;re not logged in"
   end
 end

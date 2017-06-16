@@ -1,4 +1,4 @@
-<h2>You're not logged in!</h2>
+<h2 id="login-state"><%= gettext "You're not logged in!" %></h2>
 
 <%= form_tag("/login", method: :post, class: "login-form") %>
   <label for="user"><%= gettext "User" %></label>
