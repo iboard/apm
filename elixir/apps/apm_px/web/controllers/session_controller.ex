@@ -7,13 +7,13 @@ defmodule ApmPx.SessionController do
 
     conn 
       |> set_session_cookies(user,role)
-      |> redirect to: "/"
+      |> redirect(to: "/")
   end
 
   def logout(conn,_params) do
     conn
       |> delete_session_cookies
-      |> redirect to: "/"
+      |> redirect(to: "/")
   end
 
 

@@ -3,9 +3,6 @@ defmodule ApmPx.SessionView do
   use ApmPx.Web, :view
 
   def render_session(conn) do
-    session_user  = conn.cookies["user"]
-    session_role  = conn.cookies["role"]
-
     if logged_in?(conn) do
       render "_session.html", conn: conn
     else
@@ -22,7 +19,7 @@ defmodule ApmPx.SessionView do
   end
 
   defp logged_in?(conn) do
-    conn.cookies["user"] && conn.cookies["role"]
+    current_user_name(conn) && current_user_role(conn)
   end
 end
 
