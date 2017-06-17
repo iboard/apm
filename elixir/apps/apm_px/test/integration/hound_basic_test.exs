@@ -18,6 +18,7 @@ defmodule ApmPx.HoundBasicTests do
 
       # When
       fill_field(element, "hound user")
+      select_role("developer")
       submit_element(element)
 
       # Then
@@ -32,6 +33,7 @@ defmodule ApmPx.HoundBasicTests do
       navigate_to("http://localhost:4000")
       element = find_element(:name, "user")
       fill_field(element, "hound user")
+      select_role("developer")
       submit_element(element)
       assert visible_text({:id, "login-state"}) == @logged_in_message
 
@@ -43,5 +45,9 @@ defmodule ApmPx.HoundBasicTests do
       assert visible_text({:id, "login-state"}) == @logged_out_message
     end
 
+  end
+
+  defp select_role(role) do
+    find_element(:css, "#role-selector option[value='#{role}']") |> click()
   end
 end

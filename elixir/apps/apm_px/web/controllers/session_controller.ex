@@ -1,7 +1,14 @@
 defmodule ApmPx.SessionController do
-  require Logger
+  @moduledoc """
+  Handling login, logout, and the session. By now the session is user/role only,
+  stored in cookies.
+  """
   use ApmPx.Web, :controller
 
+  @doc """
+  Get `user` and `role` from `params` and set cookies `user` and `role` 
+  and redirct to /
+  """
   def login(conn, params) do
     %{"user" => user, "role" => role} = params
 
@@ -10,6 +17,10 @@ defmodule ApmPx.SessionController do
       |> redirect(to: "/")
   end
 
+  @doc """
+  Remove cookies `user` and `role` from session 
+  and redirect to /
+  """
   def logout(conn,_params) do
     conn
       |> delete_session_cookies

@@ -1,4 +1,7 @@
 defmodule ApmPx.Router do
+  @moduledoc """
+  Routes requested url to controllers and functions
+  """
   use ApmPx.Web, :router
 
   pipeline :browser do

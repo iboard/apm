@@ -4,7 +4,7 @@
   <label for="user"><%= gettext "User" %></label>
   <input class="user" name="user" type="text"></input>
   <label for="role"><%= gettext "Role" %></label>
-  <select name="role">
+  <select id="role-selector" name="role">
     <option value="admin"><%= gettext "Admin" %></option>
     <option value="developer"><%= gettext "Developer" %></option>
     <option value="pm"><%= gettext "Product Manager" %></option>
