@@ -1,16 +1,18 @@
 # APM – The Agile Project Manager
 
-## Reasons for this project
+## Reasons why this project was started
 
-  - Jira sux in some ways.
-  - I need to do some fun stuff
-  - I need practicing in Elixir and Phoenix
+  - Jira sux
+  - I'm on vacation and I need to do some fun stuff
+  - Practicing with Elixir and Phoenix
 
 ## Prerequisites
 
-  - Erlang and Elixir is installed – see [Elixir Homepage](http://elixir-lang.org)
+  - Erlang and Elixir is installed – see [Elixir-Getting Started][]
+  - Basic knowledge of [Elixir][] and [Phoenix][] 
+  - Basic knowledge about what '[Umbrella][]' means in Elixir
 
-## Subdirectories
+## Project Structure and Subdirectories
 
 ### ./elixir
 
@@ -44,3 +46,9 @@ a single command `apm.tmux`
 
 Just another frontend to give feedback for developers about how the APM
 backend in ./elexir can be used.
+
+
+[Elixir]: https://elixir-lang.org
+[Elixir-Getting Started]: https://elixir-lang.org/getting-started/introduction.html
+[Phoenix]: http://www.phoenixframework.org
+[Umbrella]: https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-apps.html#umbrella-projects
