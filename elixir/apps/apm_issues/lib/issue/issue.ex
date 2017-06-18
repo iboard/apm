@@ -13,13 +13,15 @@ defmodule ApmIssues.Issue do
       iex> ApmIssues.Issue.new( 1, "My Title" )
       %ApmIssues.Issue{options: %{}, id: 1, title: "My Title"}
 
+      iex> ApmIssues.Issue.new( 1, "One", %{state: :new} )
+      %ApmIssues.Issue{id: 1, options: %{state: :new}, title: "One"}
+
+
   """
   defstruct id: nil, title: "", options: %{}
 
   def new( id, title, opts \\ %{} ) do
     %ApmIssues.Issue{ id: id, title: title, options: opts }
   end
-
-
 
 end
