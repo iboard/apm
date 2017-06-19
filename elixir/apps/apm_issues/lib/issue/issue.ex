@@ -35,13 +35,21 @@ defmodule ApmIssues.Issue do
   end
 
   @doc """
-  Get the current state of the issue
+  Return the state of an Issue with a given tuple of `{pid, id}` 
+  as returned from `ApmIssues.Repository` and `ApmIssues.Issue.children`
+  """
+  def state({pid, _id}), do: state(pid)
+
+  @doc """
+  Returns the current state of an issue, identified by it's `pid`
+  You can use `state({ pid, id})` as an alternative.
 
   ## Example:
 
       iex> subject = ApmIssues.Issue.new( "ID", "TITLE", %{state: "NEW"} )
       iex> ApmIssues.Issue.state(subject)
       %ApmIssues.Issue{ id: "ID", title: "TITLE", options: %{state: "NEW"}}
+
   """
   def state(pid) do
     Agent.get(pid, fn issue -> issue end)
@@ -51,6 +59,7 @@ defmodule ApmIssues.Issue do
   Return a list of tuples { pid, id } for all children
 
   ## Example
+
       iex> father_pid = ApmIssues.Issue.new( "father", "Frank" )
       iex> daughter_pid = ApmIssues.Issue.new( "daughter", "Moon Unit" )
       iex> ApmIssues.Issue.add_child(father_pid, daughter_pid)

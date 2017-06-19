@@ -7,8 +7,7 @@ defmodule ApmIssues do
     import Supervisor.Spec, warn: false
 
     children = [
-      # Starts a worker by calling: ApmIssues.Worker.start_link(arg1, arg2, arg3)
-      # worker(ApmIssues.Worker, [arg1, arg2, arg3]),
+      worker(ApmIssues.Repository, [])
     ]
 
     opts = [strategy: :one_for_one, name: ApmIssues.Supervisor]

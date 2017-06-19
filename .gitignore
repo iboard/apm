@@ -3,3 +3,4 @@ frontend/spec/units/*js
 frontend/spec/helpers/*js
 frontend/public/assets/**/*js
 doc/
+*swp
