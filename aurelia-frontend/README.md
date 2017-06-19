@@ -1,6 +1,11 @@
 # APM - The Agile Project Manager
 (c) by Andreas Altendorfer <andreas@altendorfer.at>, see `LICENSE.md`
 
+This is an alternative client for the APM to due testing the core API
+from the point of view of a developer of an independent client.
+
+The main development happens in path `../elixir`.
+
 ## Environment
 
   * [Jasmine]

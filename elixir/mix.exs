@@ -27,9 +27,13 @@ defmodule Apm.Mixfile do
 
   defp docs do
     [
-      main: "APM", # The main page in the docs
+      #main: "index", # The main page in the docs
       logo: "apps/apm_px/web/static/assets/images/apm-logo-top.png",
-      extras: ["README.md"]
+      extras: [
+        "README.md",
+        "apps/apm_issues/README-APM-ISSUES.md",
+        "apps/apm_px/README-APM-PHOENIX.md"
+      ]
     ]
   end
 end

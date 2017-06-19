@@ -1,6 +1,10 @@
 defmodule ApmIssues.Issue do
   @moduledoc """
   Define `%{ApmIssues.Issue}` and functions to modify it.
+
+  In function new, an Agent is started to hold the state of
+  an Issue. All other functions take the pid, returned by `new`,
+  as their first argument.
   """
 
   defstruct id: nil, title: "", options: %{}, children: []

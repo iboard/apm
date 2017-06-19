@@ -8,7 +8,8 @@
 #  2. Start phantomjs for E2E tests with hound.
 
 # colors
-tmx set -g default-terminal "screen-256color"
+#tmx set -g default-terminal "screen-256color"
+tmx set -g default-terminal "xterm"
 # # unicode
 tmx setw -g utf8 on
 tmx set -g status-utf8 on
