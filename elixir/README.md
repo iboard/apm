@@ -1,4 +1,8 @@
-# APM – Agile Project Manager
+# APM – The Agile Project Manager
+
+This is the ./elixir subfolder of APM.
+If you're new to the project, please start with README.md in the root-path
+of the project.
 
 is an umbrella project with the following parts
 
