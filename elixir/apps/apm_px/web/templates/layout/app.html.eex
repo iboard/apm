@@ -16,14 +16,14 @@
       <header class="header">
         <span class="logo"></span>
         <div class="menu-and-login">
-          <div class="login">
-            <%= SessionView.render_session(@conn) %>
-          </div>
           <nav class="top-navigation" role="navigation">
             <ul class="nav nav-pills pull-left">
               <li><a href="/">Home</a></li>
             </ul>
           </nav>
+          <div class="login">
+            <%= SessionView.render_session(@conn) %>
+          </div>
         </div>
       </header>
 

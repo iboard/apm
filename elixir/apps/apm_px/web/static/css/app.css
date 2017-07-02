@@ -31,9 +31,15 @@ button {
 }
 
 .top-navigation {
+  float: left;
   height: 5em;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+header {
+  background: lightgray;
+  height: 9em;
 }
 
 .main {
