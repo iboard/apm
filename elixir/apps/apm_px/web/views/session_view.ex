@@ -18,7 +18,7 @@ defmodule ApmPx.SessionView do
     conn.cookies["role"] 
   end
 
-  defp logged_in?(conn) do
+  def logged_in?(conn) do
     current_user_name(conn) && current_user_role(conn)
   end
 end

@@ -13,3 +13,9 @@
   </div>
 </div>
 
+<%= if SessionView.logged_in?(@conn) do %>
+  <div id="project-readme" class="project-readme">
+    <%= markdown("../../README.md") %>
+  </div>
+<% end %>
+

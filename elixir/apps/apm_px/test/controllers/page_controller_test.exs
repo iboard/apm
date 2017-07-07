@@ -13,13 +13,26 @@ defmodule ApmPx.PageControllerTest do
   end
 
   test "GET / when logged in", %{conn: conn} do
-    session = 
-      conn
-      |> put_resp_cookie("user", "some user")
-      |> put_resp_cookie("role", "some role")
-      |> get( "/" )
+    session = conn |> login_as("some user", "admin") |> get( "/" )
     assert html_response(session, 200) =~ "You&#39;re logged in"
   end
 
+  test "Show README.md on the landing page when logged in", %{conn: conn} do
+    session = conn |> login_as("some user", "admin") |> get( "/" )
+    assert html_response(session, 200) =~ "README.md"
+    assert html_response(session, 200) =~ "Next Step:"
+  end
+
+  test "Not show README.md on the landing page when not logged in", %{conn: conn} do
+    conn = get conn, "/"
+    refute html_response(conn, 200) =~ "README.md"
+    refute html_response(conn, 200) =~ "Next Step:"
+  end
+
+  defp login_as(conn, user,role) do
+    conn
+    |> put_resp_cookie("user", user)
+    |> put_resp_cookie("role", role)
+  end
 
 end
