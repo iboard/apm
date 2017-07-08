@@ -20,6 +20,7 @@ The elixir umbrella application includes the following applications
 
   * apm_px - Phoenix Front- and Backend
   * apm_issues - define, manipulate, and persistent (Jira)Issues
+  * apm_user - functions for user, role, ...
 
 #### Quick start developing 
 
