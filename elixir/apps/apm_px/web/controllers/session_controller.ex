@@ -1,4 +1,5 @@
 defmodule ApmPx.SessionController do
+  
   @moduledoc """
   Handling login, logout, and the session. By now the session is user/role only,
   stored in cookies.

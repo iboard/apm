@@ -6,7 +6,7 @@ defmodule ApmPx.PageView do
   def markdown(filename) do
     filename 
       |> File.read!
-      |> Earmark.to_html
+      |> Earmark.as_html!
       |> raw
   end
 end

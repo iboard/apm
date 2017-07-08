@@ -7,9 +7,26 @@ of the project.
 is an umbrella project with the following parts
 
   * apm_issues
+  * apm_user
   * apm_px
 
 Watch out `README.md` in each of the apps directories.
+
+### Update dependencies
+
+    mix deps.clean
+    mix deps.get
+    mix deps.update
+
+### Generate documentation
+
+    mix docs
+    open doc/index.html
+
+## apm_user
+
+OTP-Application responsible for all user-related functions.
+Roles, Authentication, ...
 
 ## apm_issues
 
@@ -38,4 +55,6 @@ The _Phoenix-Frontend_ application
 # TODO
 ## Next Step:
 
-  * Display this README on the Landingpage
+  ✔︎  Display this README on the Landingpage
+  ✔︎  Read roles from OTP app ApmUser.roles in session-partial
+  □  Read roles from config instead of hardcoded in helper

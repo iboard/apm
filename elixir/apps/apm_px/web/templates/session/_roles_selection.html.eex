@@ -1,0 +1,4 @@
+<select id="role-selector" name="role">
+  <%= role_options() %>
+</select>
+

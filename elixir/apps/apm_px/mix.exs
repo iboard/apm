@@ -39,7 +39,8 @@ defmodule ApmPx.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:hound, "~> 1.0"},
-     {:earmark, "~> 1.0.1"}
+     {:earmark, "~> 1.0"},
+     {:apm_user, in_umbrella: true }
     ]
   end
 end

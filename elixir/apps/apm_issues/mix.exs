@@ -26,7 +26,6 @@ defmodule ApmIssues.Mixfile do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
   end
 end
