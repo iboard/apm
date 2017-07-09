@@ -11,9 +11,9 @@ defmodule ApmUser do
 
   ## Examples
 
-    iex> Enum.find_value( ApmUser.roles, fn(role) -> role.key == :guest end)
-    true
-      
+      iex> Enum.find_value( ApmUser.roles, fn(role) -> role.key == :guest end)
+      true
+        
 
   """
   def roles do

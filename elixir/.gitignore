@@ -18,3 +18,4 @@ erl_crash.dump
 
 # Exclude hound screenshots
 /apps/apm_px/screenshot*.png
+.vimrc

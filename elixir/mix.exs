@@ -32,7 +32,8 @@ defmodule Apm.Mixfile do
       extras: [
         "README.md",
         "apps/apm_issues/README-APM-ISSUES.md",
-        "apps/apm_px/README-APM-PHOENIX.md"
+        "apps/apm_px/README-APM-PHOENIX.md",
+        "apps/apm_user/README-APM-USER.md"
       ]
     ]
   end

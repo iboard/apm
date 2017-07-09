@@ -25,11 +25,41 @@ defmodule ApmIssues.Issue do
       iex> ApmIssues.Issue.state(pid)
       %ApmIssues.Issue{id: 1, options: %{state: :new}, title: "One"}
 
-
   """
   def new( id, title, opts \\ %{} ) do
     {:ok, pid} = Agent.start_link(fn -> 
       %ApmIssues.Issue{ id: id, title: title, options: opts } 
+    end)
+    pid
+  end
+
+  @doc """
+  Issues may be initialized by simple structs when read from file-adapter
+
+  ## Example
+
+      iex> pid = ApmIssues.Issue.new( %{id: 1, title: "Item One"})
+      iex> ApmIssues.Issue.state(pid)
+      %ApmIssues.Issue{children: [], id: 1, options: %{}, title: "Item One"}
+  """
+  def new(pid) when is_pid(pid), do: pid
+  def new(_struct =  %{id: id, title: title, options: options, children: children}) do
+    new(id,title,options) |> add_children(children)
+  end
+  def new(_struct =  %{id: id, title: title, options: options}) do
+    new(id,title,options)
+  end
+  def new(_struct =  %{id: id, title: title, children: children} ) do
+    new(id,title) |> add_children(children)
+  end
+  def new(_struct =  %{id: id, title: title} ) do
+    new(id,title)
+  end
+
+  defp add_children(pid, children) do
+    Enum.each(children, fn(child) ->
+      child_pid = new(child)
+      add_child(pid,child_pid)
     end)
     pid
   end

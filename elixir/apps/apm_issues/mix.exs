@@ -26,6 +26,7 @@ defmodule ApmIssues.Mixfile do
 
   defp deps do
     [
+      {:poison, "~> 2.0"}
     ]
   end
 end
