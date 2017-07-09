@@ -61,3 +61,10 @@ header {
   padding: 2em;
 }
 
+/* Messages and hints */
+.error {
+  padding: 1em;
+  background-color: darkred;
+  color: white;
+  border: 1px solid black;
+}

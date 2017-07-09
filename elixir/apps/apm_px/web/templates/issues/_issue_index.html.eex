@@ -1,0 +1,15 @@
+<div class="issue-index">
+  <h2><%= @issue.title %></h2>
+
+  <p>
+    <b>PID:</b> <%= inspect @pid %></br>
+    <b>ID:</b> <%= @issue.id %>
+  </p>
+  
+  <%= if( (ApmIssues.Issue.children(@pid) |> Enum.count()) > 0) do %>
+    <blockquote>
+      <%= ApmPx.IssuesView.render_children(@pid) %> 
+    </blockquote>
+  <% end %>
+
+</div>
