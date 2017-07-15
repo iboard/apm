@@ -1,8 +1,5 @@
 defmodule ApmPx.HoundBasicTests do
-  use ExUnit.Case
-  use Hound.Helpers
-
-  hound_session()
+  use ApmPx.SessionHelper
 
   @logged_in_message  "You're logged in as 'hound user' in the role of a 'developer'"
   @logged_out_message "You're not logged in!"
@@ -45,21 +42,6 @@ defmodule ApmPx.HoundBasicTests do
       assert visible_text({:id, "login-state"}) == @logged_out_message
     end
 
-    @tag :hound
-    test "GET /issues lists loaded issues when logged in" do
-      # Given (logged with user and role)
-      navigate_to("http://localhost:4000")
-      element = find_element(:name, "user")
-      fill_field(element, "hound user")
-      select_role("developer")
-      submit_element(element)
-
-      navigate_to("http://localhost:4000/issues")
-      assert visible_text({:id, "issues"}) =~ "Item Number One"
-    end
   end
 
-  defp select_role(role) do
-    find_element(:css, "#role-selector option[value='#{role}']") |> click()
-  end
 end
