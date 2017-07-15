@@ -1,5 +1,9 @@
 defmodule ApmIssues.Adapter.File do
 
+  @doc"""
+  Stream from given file, filter remarks and push the entire JSON-objects
+  to the repository.
+  """
   def read!(filename) do
     File.stream!(filename)
       |> filter_remarks
@@ -9,7 +13,7 @@ defmodule ApmIssues.Adapter.File do
 
   defp filter_remarks lines do
     lines
-      |> Enum.map( fn(line) ->
+      |> Stream.map( fn(line) ->
            case Regex.match?(~r/\A#.*\Z/, line) do
              true -> ""
              _ -> line

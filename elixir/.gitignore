@@ -19,3 +19,12 @@ erl_crash.dump
 # Exclude hound screenshots
 /apps/apm_px/screenshot*.png
 .vimrc
+/apps/apm_issues/apmissues.iml
+apm.iml
+apps/apm_issues/apmissues.iml
+apps/apm_px/apmpx.iml
+apps/apm_px/test/channels/
+apps/apm_px/web/models/
+apps/apm_px/web/static/vendor/
+apps/apm_user/apmuser.iml
+/tags

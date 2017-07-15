@@ -58,8 +58,7 @@ defmodule ApmIssues.Issue do
 
   defp add_children(pid, children) do
     Enum.each(children, fn(child) ->
-      child_pid = new(child)
-      add_child(pid,child_pid)
+      add_child(pid,new(child))
     end)
     pid
   end
