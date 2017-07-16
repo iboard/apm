@@ -1,5 +1,5 @@
 <div class="issue-index">
-  <h2><%= @issue.title %></h2>
+  <h2><%= @issue.subject %></h2>
 
   <p>
     <b>PID:</b> <%= inspect @pid %></br>

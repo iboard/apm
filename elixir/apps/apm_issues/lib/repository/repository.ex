@@ -89,7 +89,7 @@ defmodule ApmIssues.Repository do
       iex> ApmIssues.Repository.drop!
       iex> ApmIssues.Issue.new(1,"Some Title") |> ApmIssues.Repository.push()
       iex> ApmIssues.Repository.find_by_id(1) |> ApmIssues.Issue.state
-      %ApmIssues.Issue{ id: 1, title: "Some Title", options: %{}, children: [] }
+      %ApmIssues.Issue{ id: 1, subject: "Some Title", options: %{}, children: [] }
   """
   def find_by_id(id) do
     GenServer.call(__MODULE__, {:find_by_id, id})
