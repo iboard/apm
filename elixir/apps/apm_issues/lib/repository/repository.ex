@@ -142,26 +142,42 @@ defmodule ApmIssues.Repository do
 
   @doc false
   def handle_cast(:drop, %{issues: _issues, refs: refs}) do
-    refs
-    |> Enum.each( fn {ref,id} ->
-        Logger.warn "DROP ISSUE #{inspect(id)} WITH REF: #{inspect ref}" 
-        Issue.drop(id)
-       end)
+    drop_all_issues_by_refs(refs)
     {:noreply, %{ issues: [], refs: [] }}
   end
 
   @doc false
   def handle_info({:DOWN, ref, :process, pid, reason}, %{ issues: issues, refs: refs}) do
     Logger.info "REMOVE ISSUE FROM REPO: #{inspect [ref,pid]}, REASON: #{inspect reason}"
-    keep_issues = Enum.filter(issues, fn({issue_pid, _issue_id}) ->
-      issue_pid == pid 
-    end)
-    keep_refs = Enum.filter(refs, fn({r,_issue}) ->
-      r == ref 
-    end)
+    keep_issues = remove_issue(issues, pid)
+    keep_refs   = remove_ref(refs, ref)
     {:noreply, %{issues: keep_issues, refs: keep_refs}}
   end
 
+  # --------------------
+  # Private helpers
+  #---------------------
+  @doc false
+  defp drop_all_issues_by_refs(refs) do
+    refs
+    |> Enum.each( fn {ref,id} ->
+        Logger.warn "DROP ISSUE #{inspect(id)} WITH REF: #{inspect ref}" 
+        Issue.drop(id)
+       end)
+  end
 
+  @doc false
+  defp remove_issue(issues, pid) do
+    Enum.filter(issues, fn({issue_pid, _issue_id}) ->
+      issue_pid != pid 
+    end)
+  end
+
+  @doc false
+  defp remove_ref(refs, ref) do
+    Enum.filter(refs, fn({r,_issue}) ->
+      r != ref 
+    end)
+  end
 end
 
