@@ -1,4 +1,5 @@
 defmodule ApmPx.ErrorViewTest do
+  use ExUnit.Case
   use ApmPx.ConnCase, async: true
 
   require Logger

@@ -49,6 +49,18 @@ defmodule ApmIssues.Repository do
     GenServer.cast(__MODULE__, {:push, issue_pid})
   end
 
+  @doc"""
+  Fetch all issues
+
+  ## Example:
+      iex> all = ApmIssues.Repository.all()
+      iex> Enum.count(all)
+      3
+  """
+  def all() do
+    GenServer.call(__MODULE__, :all)
+  end
+
 
   @doc"""
   Find an issue by it's id
@@ -77,6 +89,11 @@ defmodule ApmIssues.Repository do
   @doc false
   def handle_call(:count, _from, state) do
     {:reply, state.issues |> Enum.count, state}
+  end
+  
+  @doc false
+  def handle_call(:all, _from, state) do
+    {:reply, state.issues, state}
   end
 
   @doc false

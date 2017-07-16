@@ -1,8 +1,5 @@
 defmodule ApmPx.HoundBasicTests do
-  use ExUnit.Case
-  use Hound.Helpers
-
-  hound_session()
+  use ApmPx.SessionHelper
 
   @logged_in_message  "You're logged in as 'hound user' in the role of a 'developer'"
   @logged_out_message "You're not logged in!"
@@ -47,7 +44,4 @@ defmodule ApmPx.HoundBasicTests do
 
   end
 
-  defp select_role(role) do
-    find_element(:css, "#role-selector option[value='#{role}']") |> click()
-  end
 end

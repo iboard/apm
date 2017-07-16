@@ -22,6 +22,8 @@ defmodule ApmPx.Router do
     get "/"       , PageController   , :index
     post "/login" , SessionController, :login
     post "/logout", SessionController, :logout
+
+    get "/issues" , IssuesController,  :index
   end
 
   # Other scopes may use custom stacks.

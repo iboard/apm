@@ -1,6 +1,7 @@
 defmodule ApmPx.PageControllerTest do
   require Logger
   use ApmPx.ConnCase
+  use TestHelper
 
   test "GET / prints a welcome message", %{conn: conn} do
     conn = get conn, "/"
@@ -27,12 +28,6 @@ defmodule ApmPx.PageControllerTest do
     conn = get conn, "/"
     refute html_response(conn, 200) =~ "README.md"
     refute html_response(conn, 200) =~ "Next Step:"
-  end
-
-  defp login_as(conn, user,role) do
-    conn
-    |> put_resp_cookie("user", user)
-    |> put_resp_cookie("role", role)
   end
 
 end

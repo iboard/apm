@@ -20,8 +20,13 @@ defmodule ApmPx.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {ApmPx, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
+    [
+      mod: {ApmPx, []},
+      applications: [
+        :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
+        :apm_issues
+      ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,7 +45,8 @@ defmodule ApmPx.Mixfile do
      {:cowboy, "~> 1.0"},
      {:hound, "~> 1.0"},
      {:earmark, "~> 1.0"},
-     {:apm_user, in_umbrella: true }
+     {:apm_user, in_umbrella: true },
+     {:apm_issues, in_umbrella: true }
     ]
   end
 end

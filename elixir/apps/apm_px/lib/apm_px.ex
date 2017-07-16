@@ -5,18 +5,20 @@ defmodule ApmPx do
   as created by mix phoenix.new
   """
   use Application
+  @fixture_file Path.expand("../../../data/fixtures/issues.json", __DIR__)
 
   def start(_type, _args) do
     import Supervisor.Spec
 
     children = [
       supervisor(ApmPx.Endpoint, []),
-      # Start your own worker by calling: ApmPx.Worker.start_link(arg1, arg2, arg3)
-      # worker(ApmPx.Worker, [arg1, arg2, arg3]),
+      #worker(ApmIssues.Repository, []),
     ]
 
     opts = [strategy: :one_for_one, name: ApmPx.Supervisor]
-    Supervisor.start_link(children, opts)
+    app = Supervisor.start_link(children, opts)
+    ApmIssues.Adapter.File.read!(@fixture_file)
+    app
   end
 
   def config_change(changed, _new, removed) do
