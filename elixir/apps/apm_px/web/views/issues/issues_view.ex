@@ -13,8 +13,8 @@ defmodule ApmPx.IssuesView do
     |> Enum.map( fn(pid) -> render_issue(pid) end)
   end
 
-  defp render_issue({pid, _id}) do
-      issue = ApmIssues.Issue.state(pid)
-      render("_issue_index.html", pid: pid, issue: issue)
+  defp render_issue({pid, id}) do
+    issue = ApmIssues.Issue.state({pid, id})
+    render("_issue_index.html", pid: pid, issue: issue)
   end
 end

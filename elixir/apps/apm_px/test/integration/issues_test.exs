@@ -1,7 +1,7 @@
 defmodule ApmPx.E2EIssuesTest do
   use ApmPx.SessionHelper
 
-  describe "E2E issues" do
+  describe "E2E Issues" do
 
     @tag :hound
     test "GET /issues lists loaded issues when logged in" do

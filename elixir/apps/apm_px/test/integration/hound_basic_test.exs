@@ -4,7 +4,7 @@ defmodule ApmPx.HoundBasicTests do
   @logged_in_message  "You're logged in as 'hound user' in the role of a 'developer'"
   @logged_out_message "You're not logged in!"
 
-  describe "E2E" do
+  describe "E2E - Login/Logout" do
 
     @tag :hound
     test "Simple Login without authentication (by now, we trust our users)" do

@@ -32,4 +32,5 @@ defmodule ApmPx.Endpoint do
     signing_salt: "eYK+NFSC"
 
   plug ApmPx.Router
+
 end

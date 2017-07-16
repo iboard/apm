@@ -33,6 +33,11 @@ defmodule ApmIssues.Issue do
     pid
   end
 
+  @doc false
+  def drop(pid) do
+    Agent.stop(pid)
+  end
+
   @doc """
   Issues may be initialized by simple structs when read from file-adapter
 

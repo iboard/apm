@@ -1,4 +1,6 @@
 defmodule ApmIssues.Repository do
+  require Logger
+
   @moduledoc """
   The Issue-repository is a `GenServer` which holds the structure `%{ issues: [] }`
   with the list of known issues in the form of a tuple `{ pid, id }`
@@ -14,7 +16,18 @@ defmodule ApmIssues.Repository do
   because it will be started as a worker by `ApmIssues` application
   """
   def start_link() do
-    {:ok, _pid} = GenServer.start_link(__MODULE__, %{ issues: [] }, name: __MODULE__)
+    case GenServer.start_link(__MODULE__, %{ issues: [] , refs: []}, name: __MODULE__) do
+      {:ok, pid} -> seed(pid)
+      {:error, {:already_started, pid}} -> {:ok, pid}
+    end
+  end
+
+  # In current state of development, Issues are always loaded from fixture
+  # files. In further versions this function will go away and issues will be
+  # loaded lazily
+  defp seed(pid) do
+    ApmIssues.Repository.Seed.load()
+    {:ok, pid} 
   end
 
 
@@ -109,14 +122,41 @@ defmodule ApmIssues.Repository do
   end
 
   @doc false
-  def handle_cast({:push, issue}, state) do
-    {:noreply, %{ issues: [ { issue, Issue.state(issue).id } | state.issues ] } }
+  def handle_cast({:push, issue}, %{issues: issues, refs: refs}) do
+    id = Issue.state(issue).id
+    if Enum.member?(issues, {issue, id}) do 
+      Logger.warn "IGNORE: ISSUE ALREADY IN REPO: #{inspect issue}"
+      {:noreply, %{ issues: issues, refs: refs }}
+    else 
+      ref = Process.monitor(issue)
+      new_issues = [ {issue, id} | issues ]
+      new_refs   = [ {ref,issue} | refs ]
+      {:noreply, %{ issues: new_issues, refs: new_refs }}
+    end
   end
 
   @doc false
-  def handle_cast(:drop, _state) do
-    {:noreply, %{ issues: [] }}
+  def handle_cast(:drop, %{issues: _issues, refs: refs}) do
+    refs
+    |> Enum.each( fn {ref,id} ->
+        Logger.warn "DROP ISSUE #{inspect(id)} WITH REF: #{inspect ref}" 
+        Issue.drop(id)
+       end)
+    {:noreply, %{ issues: [], refs: [] }}
   end
+
+  @doc false
+  def handle_info({:DOWN, ref, :process, pid, reason}, %{ issues: issues, refs: refs}) do
+    Logger.info "REMOVE ISSUE FROM REPO: #{inspect [ref,pid]}, REASON: #{inspect reason}"
+    keep_issues = Enum.filter(issues, fn({issue_pid, _issue_id}) ->
+      issue_pid == pid 
+    end)
+    keep_refs = Enum.filter(refs, fn({r,_issue}) ->
+      r == ref 
+    end)
+    {:noreply, %{issues: keep_issues, refs: keep_refs}}
+  end
+
 
 end
 
