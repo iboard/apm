@@ -17,7 +17,7 @@ defmodule ApmPx.IssuesController do
   @doc """
   Show one issue with children
   """
-  def show(conn, params) do
+  def show(conn, _params) do
     render conn, "show.html"
   end
 end

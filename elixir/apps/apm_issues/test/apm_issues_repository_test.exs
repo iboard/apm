@@ -8,7 +8,7 @@ defmodule ApmIssuesRepositoryTest do
     issue1 = Issue.new(1, "Item One", %{state: :new})
     issue2 = Issue.new(2, "Item Two", %{state: :open})
     issue21 = Issue.new(2.1, "Item 2.1", %{state: :done})
-    issue2 |> Issue.add_child(issue21)
+    issue2 |> Issue.add_child(2,issue21)
 
     [issue1,issue2,issue21]
     |> Enum.each( fn issue ->
