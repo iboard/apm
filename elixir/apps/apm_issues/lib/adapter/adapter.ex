@@ -12,9 +12,8 @@ defmodule ApmIssues.Adapter do
   end
 
   defp push_item( struct ) do
-    pid = ApmIssues.Issue.new(struct)
-    ApmIssues.Repository.push(pid)
-    pid
+    ApmIssues.Issue.new(struct)
+    |> ApmIssues.Repository.push!()
   end
 
 end

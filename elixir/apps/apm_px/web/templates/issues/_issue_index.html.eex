@@ -3,7 +3,7 @@
 
   <p>
     <b>PID:</b> <%= inspect @pid %></br>
-    <b>ID:</b> <%= @issue.id %>
+    <b>ID:</b> <%= link @issue.id, to: "/issues/#{@issue.id}" %>
   </p>
   
   <%= if( (ApmIssues.Issue.children(@pid) |> Enum.count()) > 0) do %>

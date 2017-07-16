@@ -61,6 +61,11 @@ defmodule ApmIssues.Repository do
   def push(issue_pid) do
     GenServer.cast(__MODULE__, {:push, issue_pid})
   end
+  def push!(issue_pid) do
+    :ok = push(issue_pid)
+    issue_pid
+  end
+
 
   @doc"""
   Fetch all issues

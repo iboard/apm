@@ -33,7 +33,10 @@ defmodule ApmIssues.Issue do
     pid
   end
 
-  @doc false
+  @doc"""
+  Stops the Agent for the given pid.
+  Note: This will be triggered by the Repository and it will be removed from it.
+  """
   def drop(pid) do
     Agent.stop(pid)
   end
