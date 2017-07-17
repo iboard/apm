@@ -1,5 +1,10 @@
 # APM – The Agile Project Manager
 
+## Links
+
+  * [Github][]
+  * [Pivotal Tracker][]
+
 This is the ./elixir subfolder of APM.
 If you're new to the project, please start with README.md in the root-path
 of the project.
@@ -53,8 +58,13 @@ The _Phoenix-Frontend_ application
 
 
 # TODO
-## Next Step:
 
-  ✔︎  Display this README on the Landingpage
-  ✔︎  Read roles from OTP app ApmUser.roles in session-partial
-  □  Read roles from config instead of hardcoded in helper
+ See [Pivotal Tracker][] and [Github][]
+
+
+
+
+
+[Github]: https://github.com/iboard/apm
+[Pivotal Tracker]: https://www.pivotaltracker.com/n/projects/2079917
+

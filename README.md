@@ -12,6 +12,11 @@
   - Basic knowledge of [Elixir][] and [Phoenix][] 
   - Basic knowledge about what '[Umbrella][]' means in Elixir
 
+## On the Web
+
+  * [Github][]
+  * [Pivotal Tracker][]
+
 ## Project Structure and Subdirectories
 
 ### ./elixir
@@ -53,3 +58,7 @@ backend in ./elexir can be used.
 [Elixir-Getting Started]: https://elixir-lang.org/getting-started/introduction.html
 [Phoenix]: http://www.phoenixframework.org
 [Umbrella]: https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-apps.html#umbrella-projects
+
+[Github]: https://github.com/iboard/apm
+[Pivotal Tracker]: https://www.pivotaltracker.com/n/projects/2079917
+
