@@ -7,7 +7,7 @@ defmodule ApmIssues do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(ApmIssues.Repository, [])
+      worker(ApmIssues.Repository, []),
     ]
 
     opts = [strategy: :one_for_one, name: ApmIssues.Supervisor]

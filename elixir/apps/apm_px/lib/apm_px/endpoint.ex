@@ -1,5 +1,5 @@
 defmodule ApmPx.Endpoint do
-  @docmodule "Phoenix endpoint as created by phx.new"
+  @moduledoc "Phoenix endpoint as created by phx.new"
 
   use Phoenix.Endpoint, otp_app: :apm_px
 
@@ -32,4 +32,5 @@ defmodule ApmPx.Endpoint do
     signing_salt: "eYK+NFSC"
 
   plug ApmPx.Router
+
 end

@@ -4,6 +4,7 @@ defmodule ApmPx.SessionHelper do
       use ExUnit.Case
       use ApmPx.ConnCase, async: true
       use Hound.Helpers
+
       hound_session()
 
       defp select_role(role) do

@@ -4,19 +4,23 @@
 [
   {
     "id" : "Item-1",
-    "title" : "Item Number One"
+    "subject" : "Item Number One",
+    "parent_id" : "__root__"
   },
   {
     "id" : "Item-2",
-    "title" : "Item Number Two With Children",
+    "subject" : "Item Number Two With Children",
+    "parent_id" : "__root__",
     "children" : [
       { 
         "id" : "Item-2.1",
-        "title" : "Son of item 1"
+        "subject" : "Son of item 1",
+        "parent_id" : "Item-2"
       },
       {
         "id" : "Item-2.2",
-        "title" : "Daughter of item 1"
+        "subject" : "Daughter of item 1",
+        "parent_id" : "Item-2"
       }
     ]
   }

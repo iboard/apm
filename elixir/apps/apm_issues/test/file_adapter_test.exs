@@ -12,7 +12,7 @@ defmodule ApmIssues.AdapterTest do
   test "Read Items from file" do
     [first,_] = ApmIssues.Adapter.File.read!(@fixture_file)
     assert ApmIssues.Issue.state(first).id == "Item-1"
-    assert ApmIssues.Issue.state(first).title == "Item Number One"
+    assert ApmIssues.Issue.state(first).subject == "Item Number One"
   end
 
   test "Read with children" do
@@ -29,7 +29,7 @@ defmodule ApmIssues.AdapterTest do
 
     pid = ApmIssues.Repository.find_by_id("Item-1")
     assert ApmIssues.Issue.state(pid).id == "Item-1"
-    assert ApmIssues.Issue.state(pid).title == "Item Number One"
+    assert ApmIssues.Issue.state(pid).subject == "Item Number One"
   end
 end
 

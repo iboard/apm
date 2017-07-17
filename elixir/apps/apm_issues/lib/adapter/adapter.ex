@@ -11,10 +11,14 @@ defmodule ApmIssues.Adapter do
     end)
   end
 
-  defp push_item( struct ) do
-    pid = ApmIssues.Issue.new(struct)
-    ApmIssues.Repository.push(pid)
-    pid
+  defp push_item( pid ) when is_pid(pid) do
+    ApmIssues.Issue.new(pid)
+    |> ApmIssues.Repository.push!()
+  end
+  defp push_item( struct ) when not is_pid(struct) do
+    Map.merge(%{parent_id: nil}, struct)
+    |> ApmIssues.Issue.new()
+    |> ApmIssues.Repository.push!()
   end
 
 end
