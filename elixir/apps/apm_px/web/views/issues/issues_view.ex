@@ -4,7 +4,7 @@ defmodule ApmPx.IssuesView do
 
 
   def render_issues_index(_conn) do
-    Repository.all
+    Repository.root_issues
     |> Enum.map( fn(pid) -> render_issue(pid) end)
   end
 

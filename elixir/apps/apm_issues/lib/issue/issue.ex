@@ -30,7 +30,7 @@ defmodule ApmIssues.Issue do
     {:ok, pid} = Agent.start_link(fn -> 
       %ApmIssues.Issue{ id: id, subject: subject, options: opts }
     end)
-    pid
+    ApmIssues.Repository.push!(pid)
   end
 
   @doc"""
@@ -52,22 +52,20 @@ defmodule ApmIssues.Issue do
   """
   def new(pid) when is_pid(pid), do: pid
   def new(_struct =  %{id: id, subject: subject, options: options, parent_id: _parent_id, children: children}) do
-    new(id,subject,options) |> add_children(id, children)
+    new(id,subject,options) |> add_children(children)
   end
   def new(_struct =  %{id: id, subject: subject, parent_id: _parent_id, options: options}) do
     new(id,subject,options)
   end
   def new(_struct =  %{id: id, subject: subject, children: children} ) do
-    new(id,subject) |> add_children(id, children)
+    new(id,subject) |> add_children(children)
   end
   def new(_struct =  %{id: id, subject: subject} ) do
     new(id,subject)
   end
 
-  defp add_children(pid, id, children) do
-    Enum.each(children, fn(child) ->
-      add_child(pid,id,new(child))
-    end)
+  defp add_children(pid, children) do
+    Enum.each(children, fn(child) -> add_child(pid,new(child)) end)
     pid
   end
 
@@ -99,7 +97,7 @@ defmodule ApmIssues.Issue do
 
       iex> father_pid = ApmIssues.Issue.new( "father", "Frank" )
       iex> daughter_pid = ApmIssues.Issue.new( "daughter", "Moon Unit" )
-      iex> ApmIssues.Issue.add_child(father_pid, "father", daughter_pid)
+      iex> ApmIssues.Issue.add_child(father_pid, daughter_pid)
       iex> { pid, id } = ApmIssues.Issue.children(father_pid) |> hd
       iex> { is_pid(pid), id }
       { true, "daughter" }
@@ -115,23 +113,29 @@ defmodule ApmIssues.Issue do
 
       iex> father_pid = ApmIssues.Issue.new( "father", "Frank" )
       iex> son_pid    = ApmIssues.Issue.new( "son", "Dweezil" )
-      iex> ApmIssues.Issue.add_child(father_pid, "father", son_pid)
+      iex> ApmIssues.Issue.add_child(father_pid, son_pid)
       iex> { child_pid, _child_id }  = ApmIssues.Issue.children(father_pid) |> hd 
       iex> ApmIssues.Issue.state(child_pid).subject
       "Dweezil"
 
   """
-  def add_child( parent_pid, parent_id, child_pid ) do
+  def add_child( parent_pid, child_pid ) do
     Agent.update(parent_pid, fn issue ->
-      %ApmIssues.Issue{
-        id: issue.id,
-        subject: issue.subject,
-        options: issue.options,
-        children: [ { child_pid, ApmIssues.Issue.state(child_pid).id } | issue.children ],
-        parent_id: parent_id
-      }
+      update_parent_id_on_child(child_pid, issue.id)
+      add_child_to_issue(issue,child_pid)
     end)
     parent_pid
   end
 
+  defp add_child_to_issue(issue,child_pid) do
+    Map.merge issue, %{ 
+      children: [ { child_pid, ApmIssues.Issue.state(child_pid).id } | issue.children ]
+    }
+  end
+
+  defp update_parent_id_on_child(child_pid, parent_id) do
+    Agent.update(child_pid, fn child ->
+      Map.merge(child, %{parent_id: parent_id})
+    end)
+  end
 end

@@ -80,6 +80,17 @@ defmodule ApmIssues.Repository do
     GenServer.call(__MODULE__, :all)
   end
 
+  @doc"""
+  Fetch Issues with parent_id = nil
+  ## Example:
+      iex> roots = ApmIssues.Repository.root_issues()
+      iex> Enum.count(roots)
+      2
+  """
+  def root_issues() do
+    GenServer.call(__MODULE__, :root_issues)
+  end
+
 
   @doc"""
   Find an issue by it's id
@@ -116,28 +127,23 @@ defmodule ApmIssues.Repository do
   end
 
   @doc false
+  def handle_call(:root_issues, _from, state) do
+    {:reply, state.issues |> filter_roots, state}
+  end
+
+  @doc false
   def handle_call({:find_by_id, id}, _from, state) do
-    result = state.issues
-               |> Enum.filter(fn({_pid,fid}) -> fid == id end)
-    found =
-      case result do
-          [first|_] -> first
-          _ -> :not_found
-      end
-    {:reply, found, state}
+    issue = find_issue(state,id)
+    {:reply, issue, state}
   end
 
   @doc false
   def handle_cast({:push, issue}, %{issues: issues, refs: refs}) do
     id = Issue.state(issue).id
     if Enum.member?(issues, {issue, id}) do 
-      Logger.info "IGNORE: ISSUE ALREADY IN REPO: #{inspect issue}"
-      {:noreply, %{ issues: issues, refs: refs }}
+      ignore_existing_issue(issues, issue, refs)
     else 
-      ref = Process.monitor(issue)
-      new_issues = [ {issue, id} | issues ]
-      new_refs   = [ {ref,issue} | refs ]
-      {:noreply, %{ issues: new_issues, refs: new_refs }}
+      register_issue(issues, issue, id, refs)
     end
   end
 
@@ -150,14 +156,40 @@ defmodule ApmIssues.Repository do
   @doc false
   def handle_info({:DOWN, ref, :process, pid, reason}, %{ issues: issues, refs: refs}) do
     Logger.info "REMOVE ISSUE FROM REPO: #{inspect [ref,pid]}, REASON: #{inspect reason}"
-    keep_issues = remove_issue(issues, pid)
-    keep_refs   = remove_ref(refs, ref)
-    {:noreply, %{issues: keep_issues, refs: keep_refs}}
+    {:noreply, %{issues: remove_issue(issues,pid), refs: remove_ref(refs,ref)}}
   end
 
-  # --------------------
+  # ------------------------------------------------------------
   # Private helpers
-  #---------------------
+  #-------------------------------------------------------------
+
+  defp find_issue(state, id) do
+    result = state.issues |> Enum.filter(fn({_pid,fid}) -> fid == id end)
+    case result do
+      [first|_] -> first
+      _ -> :not_found
+    end
+  end
+
+  defp filter_roots issues do
+    issues
+    |> Enum.filter( fn(issue) ->
+      ApmIssues.Issue.state(issue).parent_id == nil
+    end)
+  end
+
+  defp ignore_existing_issue(issues, issue, refs) do
+    Logger.info "IGNORE: ISSUE ALREADY IN REPO: #{inspect issue}"
+    {:noreply, %{ issues: issues, refs: refs }}
+  end
+
+  defp register_issue(issues, issue, id, refs) do
+    ref = Process.monitor(issue)
+    new_issues = [ {issue, id} | issues ]
+    new_refs   = [ {ref,issue} | refs ]
+    {:noreply, %{ issues: new_issues, refs: new_refs }}
+  end
+
   @doc false
   defp drop_all_issues_by_refs(refs) do
     refs
