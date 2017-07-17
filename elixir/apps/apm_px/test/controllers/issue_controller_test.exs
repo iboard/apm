@@ -4,11 +4,6 @@ defmodule ApmPx.IssueControllerTest do
   use TestHelper
 
   setup _ do
-    # FIXME: Repository should be seeded when application starts, tho.
-    # Sometimes, when `mix test` runs from the umbrella-root-path
-    # the Repository crashes before this setup run. To make sure
-    # the Issues are loaded, we're calling load here again.
-    # The Repository ignores Issues when loaded twice!
     ApmIssues.Repository.Seed.load()
     :ok
   end
