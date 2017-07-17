@@ -15,7 +15,7 @@ defmodule ApmIssues.Adapter do
     ApmIssues.Issue.new(pid)
     |> ApmIssues.Repository.push!()
   end
-  defp push_item( struct ) do
+  defp push_item( struct ) when not is_pid(struct) do
     Map.merge(%{parent_id: nil}, struct)
     |> ApmIssues.Issue.new()
     |> ApmIssues.Repository.push!()

@@ -26,6 +26,7 @@ defmodule ApmIssues.Repository do
   # files. In further versions this function will go away and issues will be
   # loaded lazily
   defp seed(pid) do
+    ApmIssues.Repository.drop!
     ApmIssues.Repository.Seed.load()
     {:ok, pid} 
   end
@@ -130,7 +131,7 @@ defmodule ApmIssues.Repository do
   def handle_cast({:push, issue}, %{issues: issues, refs: refs}) do
     id = Issue.state(issue).id
     if Enum.member?(issues, {issue, id}) do 
-      Logger.warn "IGNORE: ISSUE ALREADY IN REPO: #{inspect issue}"
+      Logger.info "IGNORE: ISSUE ALREADY IN REPO: #{inspect issue}"
       {:noreply, %{ issues: issues, refs: refs }}
     else 
       ref = Process.monitor(issue)
@@ -161,7 +162,7 @@ defmodule ApmIssues.Repository do
   defp drop_all_issues_by_refs(refs) do
     refs
     |> Enum.each( fn {ref,id} ->
-        Logger.warn "DROP ISSUE #{inspect(id)} WITH REF: #{inspect ref}" 
+        Logger.info "DROP ISSUE #{inspect(id)} WITH REF: #{inspect ref}"
         Issue.drop(id)
        end)
   end

@@ -4,11 +4,13 @@
 [
   {
     "id" : "Item-1",
-    "subject" : "Item Number One"
+    "subject" : "Item Number One",
+    "parent_id" : "__root__"
   },
   {
     "id" : "Item-2",
     "subject" : "Item Number Two With Children",
+    "parent_id" : "__root__",
     "children" : [
       { 
         "id" : "Item-2.1",
