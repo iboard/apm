@@ -31,4 +31,27 @@ defmodule ApmPx.IssueControllerTest do
     assert html_response(session, 200) =~ "Daughter of item 1"
   end
 
+  test "GET /issues/new renders 'new issue form'", %{conn: conn} do
+    session = conn 
+              |> login_as("some user", "admin") 
+              |> get( "/issues/new" )
+    assert html_response(session, 200) =~ "Create New Issue"
+    assert html_response(session, 200) =~ "Subject"
+    assert html_response(session, 200) =~ "Description"
+    assert html_response(session, 200) =~ "Submit"
+  end
+
+  test "POST /issues creates a new issue", %{conn: conn} do
+    conn 
+    |> login_as("some user", "admin") 
+    |> post( "/issues", subject: "New Issue", description: "Some text" )
+
+    issue = ApmIssues.Repository.find_by_id("New-Issue")
+    assert ApmIssues.Issue.state(issue).id == "New-Issue"
+    assert ApmIssues.Issue.state(issue).subject == "New Issue"
+    assert ApmIssues.Issue.state(issue).options == %{"description" => "Some text"}
+  end
+
+
+
 end

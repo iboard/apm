@@ -1,0 +1,16 @@
+<%= form_tag("/issues", method: :post, class: "form-default") do %>
+
+  <div class="field-group">
+    <label for="subject"><%= gettext "Subject" %></label>
+    <input type="text" class="input-field" name="subject"/>
+  </div>
+
+  <div class="field-group">
+    <label for="description"><%= gettext "Description" %></label>
+    <textarea name="description" class="input-text"></textarea>
+  </div>
+  
+  <div class="form-actions">
+    <button type="submit"><%= gettext "Submit" %></button>
+  </div>
+<%= end %>

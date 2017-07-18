@@ -17,9 +17,10 @@
         <span class="logo"></span>
         <div class="menu-and-login">
           <nav class="top-navigation" role="navigation">
-            <ul class="nav nav-pills pull-left">
+            <ul id="main-menu" class="nav nav-pills pull-left">
               <li><a href="/">Home</a></li>
               <li><a href="/issues">Issues</a></li>
+              <li><a href="/issues/new">Create Issue</a></li>
             </ul>
           </nav>
           <div class="login">

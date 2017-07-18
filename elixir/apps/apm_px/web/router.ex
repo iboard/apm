@@ -19,11 +19,15 @@ defmodule ApmPx.Router do
   scope "/", ApmPx do
     pipe_through :browser # Use the default browser stack
 
+    # session
     get "/"       , PageController   , :index
     post "/login" , SessionController, :login
     post "/logout", SessionController, :logout
 
-    get "/issues" , IssuesController,  :index
+    # issues
+    get "/issues" ,     IssuesController,  :index
+    post "/issues" ,    IssuesController,  :create
+    get "/issues/new" , IssuesController,  :new
     get "/issues/:id" , IssuesController,  :show
   end
 

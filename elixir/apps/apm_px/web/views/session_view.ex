@@ -2,7 +2,6 @@ defmodule ApmPx.SessionView do
   require Logger
   use ApmPx.Web, :view
 
-
   @doc """
   Renders the partial for the sessions section on the front-end.
   If user is logged in, it renders "_session.html" otherwise "_login.html".

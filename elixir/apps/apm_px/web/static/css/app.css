@@ -68,3 +68,36 @@ header {
   color: white;
   border: 1px solid black;
 }
+
+/* Forms */
+
+.form-default {
+  padding: 1em;
+  border: 1px solid #ddd;
+}
+
+.form-default label {
+  margin-top: 0.5em;
+  width: 9em;
+}
+
+.form-default input {
+  width: 100%;
+}
+
+.form-default textarea {
+  width: 100%;
+  height: 5em;
+}
+
+.form-default .form-actions {
+  margin-top: 1em;
+}
+.form-default .form-actions button {
+  font-size: larger;
+}
+
+.form-default .input-text,
+.form-default .input-field {
+  border: 1px solid #ddd;
+}

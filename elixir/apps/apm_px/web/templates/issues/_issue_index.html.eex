@@ -3,10 +3,13 @@
 
   <p>
     <b>PID:</b> <%= inspect @pid %></br>
-    <b>ID:</b> <%= link @issue.id, to: "/issues/#{@issue.id}" %>
+    <b>ID:</b> <%= link @issue.id, to: "/issues/#{@issue.id}" %></br>
     <%= if @issue.parent_id do %>
       <b>Parent ID:</b> <%= link @issue.parent_id, to: "/issues/#{@issue.parent_id}" %>
     <%= end %>
+    <code>
+      <%= inspect @issue.options %>
+    </code>
   </p>
   
   <%= if( (ApmIssues.Issue.children(@pid) |> Enum.count()) > 0) do %>

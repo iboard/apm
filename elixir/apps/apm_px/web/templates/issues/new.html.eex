@@ -1,0 +1,11 @@
+<h1>Create New Issue</h1>
+
+<%= unless ApmPx.SessionView.logged_in?(@conn) do %>
+  <div class="error"><%= gettext "Please login first" %></div>
+<% else %>
+  <div id="issues" class="issues">
+    <%= ApmPx.IssuesView.form(@conn) %>
+  </div>
+<% end %>
+
+
