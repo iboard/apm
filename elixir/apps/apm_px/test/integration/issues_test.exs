@@ -30,7 +30,6 @@ defmodule ApmPx.E2EIssuesTest do
       submit_element({:name, "subject"})
 
       assert visible_text({:class, "alert-success"}) =~ "Issue successfully created"
-
     end
   end
 

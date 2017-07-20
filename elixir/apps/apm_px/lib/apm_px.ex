@@ -11,6 +11,7 @@ defmodule ApmPx do
 
     children = [
       supervisor(ApmPx.Endpoint, []),
+      worker(ApmIssues.Repository, [])
     ]
 
     opts = [strategy: :one_for_one, name: ApmPx.Supervisor]

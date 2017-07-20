@@ -3,11 +3,6 @@ defmodule ApmPx.IssueControllerTest do
   use ApmPx.ConnCase
   use TestHelper
 
-  setup _ do
-    ApmIssues.Repository.Seed.load()
-    :ok
-  end
-
   test "GET /issues lists all issues", %{conn: conn} do
     session = conn 
               |> login_as("some user", "admin") 
