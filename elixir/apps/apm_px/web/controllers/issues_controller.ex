@@ -4,7 +4,11 @@ defmodule ApmPx.IssuesController do
   @moduledoc """
   Routes handled by this controller
 
-  - `/issues` index.html
+      - GET `/issues` index.html
+      - GET `/issues/new` new.html
+      - GET `/issues/:id` show.html
+      - POST `/issues`    create & redirect to show new issue
+
   """
 
   use ApmPx.Web, :controller
@@ -24,7 +28,7 @@ defmodule ApmPx.IssuesController do
   end
 
   @doc """
-  Show form for new Issue
+  Show form for new Issue & submit to `POST /issues`
   """
   def new(conn, _params) do
     render conn, "new.html"
@@ -36,8 +40,14 @@ defmodule ApmPx.IssuesController do
   def create(conn, params) do
     {id,subject,options} = cast(params)
     ApmIssues.Issue.new( id, subject, options )
-    redirect conn, to: "/issues/#{id}"
+    conn 
+      |> put_flash(:success, gettext("Issue successfully created"))
+      |> redirect(to: "/issues/#{id}")
   end
+
+
+  ### Private helpers ########################################
+
 
   defp cast(params) do
     subject = params["subject"]

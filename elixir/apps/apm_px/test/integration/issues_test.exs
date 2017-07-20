@@ -20,6 +20,18 @@ defmodule ApmPx.E2EIssuesTest do
       assert visible_text({:class, "error"}) =~ "Please login first"
       refute visible_page_text() =~ "Item Number One"
     end
+
+    @tag :hound
+    test "POST /issues creates a new issue in repo" do
+      login_as("user", "developer")
+      navigate_to("http://localhost:4000/issues/new")
+
+      fill_field({:name, "subject"}, "A New Subject")
+      submit_element({:name, "subject"})
+
+      assert visible_text({:class, "alert-success"}) =~ "Issue successfully created"
+
+    end
   end
 
 end
