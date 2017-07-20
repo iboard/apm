@@ -1,16 +1,18 @@
-<%= form_tag("/issues", method: :post, class: "form-default") do %>
+<%= form_for @conn, issues_path(@conn, :create), 
+             [class: "form-default", as: "issue" ], 
+             fn(f) -> %>
 
   <div class="field-group">
-    <label for="subject"><%= gettext "Subject" %></label>
-    <input type="text" class="input-field" name="subject"/>
+    <%= label f, :subject, gettext("Subject") %>
+    <%= text_input f, :subject, class: "input-field" %>
   </div>
 
   <div class="field-group">
-    <label for="description"><%= gettext "Description" %></label>
-    <textarea name="description" class="input-text"></textarea>
+    <%= label f, :description, gettext("Description") %>
+    <%= textarea f, :description, class: "input-text" %>
   </div>
   
   <div class="form-actions">
-    <button type="submit"><%= gettext "Submit" %></button>
+    <%= submit gettext("Submit") %>
   </div>
 <%= end %>

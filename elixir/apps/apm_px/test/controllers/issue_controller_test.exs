@@ -39,7 +39,9 @@ defmodule ApmPx.IssueControllerTest do
   test "POST /issues creates a new issue", %{conn: conn} do
     conn 
     |> login_as("some user", "admin") 
-    |> post( "/issues", subject: "New Issue", description: "Some text" )
+    |> post( "/issues", 
+             %{issue: %{ subject: "New Issue", description: "Some text"}} 
+           )
 
     issue = ApmIssues.Repository.find_by_id("New-Issue")
     assert ApmIssues.Issue.state(issue).id == "New-Issue"

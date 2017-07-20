@@ -26,8 +26,8 @@ defmodule ApmPx.E2EIssuesTest do
       login_as("user", "developer")
       navigate_to("http://localhost:4000/issues/new")
 
-      fill_field({:name, "subject"}, "A New Subject")
-      submit_element({:name, "subject"})
+      fill_field({:name, "issue[subject]"}, "A New Subject")
+      submit_element({:name, "issue[subject]"})
 
       assert visible_text({:class, "alert-success"}) =~ "Issue successfully created"
     end

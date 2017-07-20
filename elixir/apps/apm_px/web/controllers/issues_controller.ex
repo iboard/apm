@@ -38,7 +38,7 @@ defmodule ApmPx.IssuesController do
   POST /issues Creates a new issue
   """
   def create(conn, params) do
-    {id,subject,options} = cast(params)
+    {id,subject,options} = cast(params["issue"])
     ApmIssues.Issue.new( id, subject, options )
     conn 
       |> put_flash(:success, gettext("Issue successfully created"))
@@ -52,12 +52,13 @@ defmodule ApmPx.IssuesController do
   defp cast(params) do
     subject = params["subject"]
     id = make_id(subject)
-    options = Map.drop(params, ["_csrf_token","_utf8","subject"])
-    {id,subject,options}
+    options = Map.drop(params, ["subject"])
+    {id, subject, options}
   end
 
   defp make_id(string) do
-    String.replace(string," ","-")
+    string
+    |> String.replace(" ","-")
   end
 end
 
